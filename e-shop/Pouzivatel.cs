@@ -1,13 +1,14 @@
-﻿using e_shop;
-
-class Pouzivatel
+﻿namespace e_shop
 {
-    public string Meno { get; set; }
-    public Kosik Kosik { get; set; }
-
-    public Pouzivatel(string meno)
+    class Pouzivatel
     {
-        Meno = meno;
-        Kosik = new Kosik();
+        public string Meno { get; set; }
+        public Kosik Kosik { get; set; }
+
+        public Pouzivatel(string meno)
+        {
+            Meno = meno;
+            Kosik = new Kosik();
+        }
     }
 }

@@ -4,11 +4,13 @@ using System.Text;
 
 namespace e_shop
 {
-    internal class ZoznamProduktov
+    internal static class ZoznamProduktov
     {
-
-        public static void Main(string[] args)
+        //public List<Tricko> Tricka { get; set; }
+        //public List<Dziny> Dziny { get; set; }
+        public static void Demo()
         {
+            //Tricka = new List<Tricko>();
             Tricko t1 = new Tricko("Basic White", "Biela", "Bavlna", "Nike", 19.99, "M", true);
             Tricko t2 = new Tricko("Sport Black", "Čierna", "Polyester", "Adidas", 24.99, "L", true);
             Tricko t3 = new Tricko("Urban Style", "Modrá", "Bavlna", "Puma", 22.50, "S", false);
@@ -25,6 +27,7 @@ namespace e_shop
             t6.vypisInfo();
             t7.vypisInfo();
 
+            //Dziny = new List<Dziny>();
             Dziny d1 = new Dziny("Classic Blue", "Modrá", "Denim", "Levis", 59.99, true);
             Dziny d2 = new Dziny("Slim Black", "Čierna", "Denim", "Zara", 39.99, true);
             Dziny d3 = new Dziny("Regular Grey", "Sivá", "Denim", "H&M", 34.99, false);

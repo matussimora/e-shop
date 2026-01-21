@@ -24,8 +24,7 @@
     }
     
 public void vypisInfo()
-    {
-        System.Console.WriteLine("Názov: " + nazov);
+    { System.Console.WriteLine("Názov: " + nazov);
         System.Console.WriteLine("Značka: " + znacka);
         System.Console.WriteLine("Farba: " + farba);
         System.Console.WriteLine("Materiál: " + material);
