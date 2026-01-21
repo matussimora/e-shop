@@ -92,7 +92,7 @@ namespace e_shop
         if (!EnsureUser()) return;
         ShowAllProducts(produkty);
         Console.Write("Zadajte číslo produktu: ");
-        if (!int.TryParse(Console.ReadLine(), out int idx) || idx < 1 || idx > produkty.Count)
+        if (!int.TryParse(Console.ReadLine(), out int idx) || idx < 1 || idx > produkty.Count) 
         {
             Console.WriteLine("Neplatné číslo");
             return;
