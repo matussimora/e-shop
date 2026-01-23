@@ -10,7 +10,7 @@ namespace HeartzClothing
         {
             Console.OutputEncoding = Encoding.UTF8;
             Console.Title = "Heartz Clothing";
-
+             
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine("╔══════════════════════════════════════╗");
             Console.WriteLine("║            HEARTZ CLOTHING          ║");
