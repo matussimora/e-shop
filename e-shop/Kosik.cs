@@ -1,73 +1,79 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
 
-namespace e_shop
+namespace HeartzClothing
 {
-    internal class Kosik
+    class Kosik
     {
         private List<PolozkaKosika> polozky = new List<PolozkaKosika>();
 
+        public List<PolozkaKosika> Polozky
+        {
+            get { return polozky; }
+        }
+
         public void PridajProdukt(Produkt produkt, int mnozstvo)
         {
-            if (mnozstvo <= 0) return;
-            var exist = polozky.Find(p => p.Produkt.Nazov == produkt.Nazov);
-            if (exist != null)
+            if (produkt == null)
             {
-                exist.Mnozstvo += mnozstvo;
+                return;
+            }
+
+            if (mnozstvo <= 0)
+            {
+                return;
+            }
+
+            PolozkaKosika existujuca = polozky.FirstOrDefault(p => p.Produkt.Id == produkt.Id);
+
+            if (existujuca == null)
+            {
+                PolozkaKosika nova = new PolozkaKosika();
+                nova.Produkt = produkt;
+                nova.Mnozstvo = mnozstvo;
+                polozky.Add(nova);
             }
             else
             {
-                polozky.Add(new PolozkaKosika(produkt, mnozstvo));
+                int noveMnozstvo = existujuca.Mnozstvo + mnozstvo;
+                existujuca.Mnozstvo = noveMnozstvo;
             }
         }
 
-        public void OdstranProdukt(string nazov)
+        public void OdstranProdukt(int produktId)
         {
-            polozky.RemoveAll(p => p.Produkt.Nazov == nazov);
-        }
-
-        public void ZmenMnozstvo(string nazov, int noveMnozstvo)
-        {
-            var item = polozky.Find(p => p.Produkt.Nazov == nazov);
-            if (item != null)
+            PolozkaKosika najdena = polozky.FirstOrDefault(p => p.Produkt.Id == produktId);
+            if (najdena != null)
             {
-                if (noveMnozstvo <= 0) polozky.Remove(item);
-                else item.Mnozstvo = noveMnozstvo;
+                polozky.Remove(najdena);
             }
         }
 
-        public double CelkovaCena()
+        public void ZmenMnozstvo(int produktId, int noveMnozstvo)
         {
-            double sum = 0;
-            foreach (var p in polozky)
-                sum += p.CelkovaCena();
-            return sum;
+            PolozkaKosika najdena = polozky.FirstOrDefault(p => p.Produkt.Id == produktId);
+            if (najdena != null)
+            {
+                if (noveMnozstvo <= 0)
+                {
+                    polozky.Remove(najdena);
+                }
+                else
+                {
+                    najdena.Mnozstvo = noveMnozstvo;
+                }
+            }
         }
 
-        public void VypisKosik()
+        public decimal VratCelkovaCena()
         {
-            if (polozky.Count == 0)
-            {
-                Console.WriteLine("Košík je prázdny.");
-                return;
-            }
-            Console.WriteLine("Položky v košíku:");
-            foreach (var p in polozky)
-            {
-                Console.WriteLine($"{p.Produkt.Nazov} x{p.Mnozstvo} - {p.CelkovaCena():0.00} €");
-            }
-            Console.WriteLine($"Celkom: {CelkovaCena():0.00} €");
+            decimal suma = polozky.Sum(p => p.CelkovaCena);
+            return suma;
         }
 
-        public void Vycistit()
+        public void Vycisti()
         {
             polozky.Clear();
-        }
-
-        public PolozkaKosika NajdiPolozku(string nazov)
-        {
-            return polozky.Find(p => p.Produkt.Nazov == nazov);
         }
     }
 }

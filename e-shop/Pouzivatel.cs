@@ -1,14 +1,18 @@
-﻿namespace e_shop
+﻿namespace HeartzClothing
 {
     class Pouzivatel
     {
-        public string Meno { get; set; }
-        public Kosik Kosik { get; set; }
+        public string PrihlasovacieMeno { get; set; }
+        public string Heslo { get; set; }
 
-        public Pouzivatel(string meno)
+        public virtual string Rola
         {
-            Meno = meno;
-            Kosik = new Kosik();
+            get { return "Zakaznik"; }
+        }
+
+        public override string ToString()
+        {
+            return PrihlasovacieMeno + " (" + Rola + ")";
         }
     }
 }
